@@ -6,11 +6,16 @@ template <class type>
 class disjoint_set
 {
 public:
-    disjoint_set(__int32 n = 0) : _groupCount(n), _setcount(std::vector(_groupCount, 1)) { createDisjointSet(); }
+    disjoint_set(__int32 n = 0) : _groupCount(n), _setcount(std::vector<type>(_groupCount, 1)) { createDisjointSet(); }
     void union_set(type, type);
     type find_parent(type);
     inline bool is_valid(type &) const;
     bool detect_cycle(type &, type &);
+    inline type get_dsu_count() { return _groupCount; }
+    inline type get_set_count(type node_id)
+    {
+        return (is_valid(node_id)) ? _setcount[node_id] : -1;
+    };
 
 private:
     __int32 _groupCount;
@@ -18,6 +23,7 @@ private:
     std::vector<type> _rank;
     std::vector<type> _setcount;
     inline void createDisjointSet();
+    type find_parent_util(type);
 };
 
 template <class type>
@@ -46,17 +52,26 @@ bool disjoint_set<type>::detect_cycle(type &node_id1, type &node_id2)
 template <class type>
 type disjoint_set<type>::find_parent(type node_id)
 {
-    // need isValid
+    return (is_valid(node_id)) ? find_parent_util(node_id) : -1;
+}
+template <class type>
+type disjoint_set<type>::find_parent_util(type node_id)
+{
     if (node_id == _parent[node_id])
         return node_id;
 
-    return _parent[node_id] = find_parent(_parent[node_id]);
+    return _parent[node_id] = find_parent_util(_parent[node_id]);
 }
 
 template <class type>
 void disjoint_set<type>::union_set(type node_id1, type node_id2)
 {
-    // need isValid
+    if ((not is_valid(node_id1)) or (not is_valid(node_id2)))
+    {
+        std::cerr << "[*]Node Invalid" << std::endl;
+        return;
+    }
+
     type group_id1 = find_parent(node_id1);
     type group_id2 = find_parent(node_id2);
     bool flag = false;
