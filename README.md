@@ -5,35 +5,23 @@
 
 Implementation of **Disjoint Set Union Header File(.hpp)** from scratch using objected oriented design approach.
 
-### How to use?
-* **disjoint_set.hpp** file must be present in the `present working directory` or its path must be set in the environment variable for the IDE.
-* Compatible C++ versions: **`C++11`, `C++14`, `C++17`, `C++20`**
+## How to use?
+* **disjoint_set.hpp** file must be present in the **present working directory** or its path must be set in the environment variable for the IDE.
+* Compatible C++ versions: **C++11, C++14, C++17, C++20**
 
 ---
-### Key Functionalities
+## Key Functionalities
 
 * To create a **DSU**(Disjoint Set Union) with **N groups**.
 * To merge two set with given `node_ids`.
     * Implemented **Union-By-Rank** to perform optimsed merger of nodes.
 * To find the `parent_node` for a given input node.
     * Implemented **Path Compression** to optimise the method.
-* To perform validation of nodes with the given `node_id`s.
+* To perform validation of nodes with the given `node_id`.
 * To detect existence of a cycle by utilising the **find_parent** method.
 *  To obtain the total count of disjoint sets in **O(1)**
 *  To obtain the size of the set to which a given node belongs in **O(1)**
 
-
----
-## Methods
-**disjoint_set<datatype>:: method()**
-
-* **`bool` is_valid(`datatype &`)**
-* **`datatype` find_parent(`datatype`)**
-* **`void` union_set(`datatype`, `datatype`)**
-* **`bool` detect_cycle(`datatype &`, `datatype &`)**
-* **`datatype` get_dsu_count()**
-* **`datatype` get_set_count(`datatype`)**
-  
 ---
 ## Sample C++ template:
 
@@ -50,6 +38,18 @@ Implementation of **Disjoint Set Union Header File(.hpp)** from scratch using ob
         // code goes here
     }      
 ```
+---
+
+## Methods
+**disjoint_set<datatype>:: method()**
+
+* **bool is_valid(`datatype &`)**
+* **datatype find_parent(`datatype`)**
+* **void union_set(`datatype`, `datatype`)**
+* **bool detect_cycle(`datatype &`, `datatype &`)**
+* **datatype get_dsu_count()**
+* **datatype get_set_count(`datatype`)**
+  
 
 ---
 
