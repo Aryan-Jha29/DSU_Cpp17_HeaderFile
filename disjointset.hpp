@@ -33,4 +33,29 @@ void disjoint_set<type>::createDisjointSet()
     for (type i = 0; i < _groupCount; i++)
         _parent[i] = i;
 }
+
+template <class type>
+bool disjoint_set<type>::detect_cycle(type &node_id1, type &node_id2)
+{
+    return (find_parent(node_id1) == find_parent(node_id2));
+}
+
+/*  
+ 1 2 3 4 5 -> 5
+ Union(12) [12, 3,4,5] -> 4
+ union(34) [12, 34, 5] -> 3
+ Union(12,34) [1234, 5] -> 2
+
+*/
+/*Implementation of find_parent using Path Compression*/
+template <class type>
+type disjoint_set<type>::find_parent(type node_id)
+{
+    // need isValid
+    if (node_id == _parent[node_id])
+        return node_id;
+
+    return _parent[node_id] = find_parent(_parent[node_id]);
+}
+
 #endif
