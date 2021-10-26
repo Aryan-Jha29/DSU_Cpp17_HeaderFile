@@ -2,11 +2,6 @@
 #define disjointset_h
 #include <vector>
 
-/* Note to self
-rank init to 1 [Default]
-rank -> set's max depth.
-*/
-
 template <class type>
 class disjoint_set
 {
@@ -33,7 +28,14 @@ void disjoint_set<type>::createDisjointSet()
     for (type i = 0; i < _groupCount; i++)
         _parent[i] = i;
 }
+/* Used to check if node used is valid and belongs to dsu or not */
+template <class type>
+bool disjoint_set<type>::is_valid(type &node_id) const
+{
+    return (node_id >= 0 and node_id < _parent.size());
+}
 
+/* To detect cycle for 2 nodes with respective ids */
 template <class type>
 bool disjoint_set<type>::detect_cycle(type &node_id1, type &node_id2)
 {
@@ -51,7 +53,6 @@ type disjoint_set<type>::find_parent(type node_id)
     return _parent[node_id] = find_parent(_parent[node_id]);
 }
 
-/*To merge two groups with node ids -> node_id1 and node_id2 */
 template <class type>
 void disjoint_set<type>::union_set(type node_id1, type node_id2)
 {
