@@ -3,7 +3,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-brains.svg)](https://forthebadge.com)
 
 
-Implementation of **Disjoint Set Union Header File(.hpp)** from scratch using objected oriented design approach.
+Implementation of **Disjoint Set Union Header File(.hpp)** from scratch using object oriented design approach.
 
 ## How to use?
 * **disjoint_set.hpp** file must be present in the **present working directory** or its path must be set in the environment variable for the IDE.
