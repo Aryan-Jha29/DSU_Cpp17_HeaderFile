@@ -1,3 +1,7 @@
+# Test Files
+headerTests.cpp
+.vscode
+
 # Prerequisites
 *.d
 
@@ -30,3 +34,4 @@
 *.exe
 *.out
 *.app
+
