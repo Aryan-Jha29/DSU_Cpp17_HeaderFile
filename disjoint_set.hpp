@@ -9,10 +9,10 @@ public:
     disjoint_set(__int32 n = 0) : _groupCount(n), _setcount(std::vector<type>(_groupCount, 1)) { createDisjointSet(); }
     void union_set(type, type);
     type find_parent(type);
-    inline bool is_valid(type &) const;
+    bool is_valid(type &) const;
     bool detect_cycle(type &, type &);
-    inline type get_dsu_count() { return _groupCount; }
-    inline type get_set_count(type node_id)
+    type get_dsu_count() { return _groupCount; }
+    type get_set_count(type node_id)
     {
         return (is_valid(node_id)) ? _setcount[node_id] : -1;
     };
@@ -22,21 +22,22 @@ private:
     std::vector<type> _parent;
     std::vector<type> _rank;
     std::vector<type> _setcount;
-    inline void createDisjointSet();
+    void createDisjointSet();
     type find_parent_util(type);
 };
 
 template <class type>
-void disjoint_set<type>::createDisjointSet()
+inline void disjoint_set<type>::createDisjointSet()
 {
     _parent = std::vector<type>(_groupCount);
     _rank = std::vector<type>(_groupCount, 1);
     for (type i = 0; i < _groupCount; i++)
         _parent[i] = i;
 }
+
 /* Used to check if node used is valid and belongs to dsu or not */
 template <class type>
-bool disjoint_set<type>::is_valid(type &node_id) const
+inline bool disjoint_set<type>::is_valid(type &node_id) const
 {
     return (node_id >= 0 and node_id < _parent.size());
 }
@@ -48,7 +49,7 @@ bool disjoint_set<type>::detect_cycle(type &node_id1, type &node_id2)
     return (find_parent(node_id1) == find_parent(node_id2));
 }
 
-/* Implementation of find_parent using Path Compression */
+/* Implementation of find_parent using Path Compression. */
 template <class type>
 type disjoint_set<type>::find_parent(type node_id)
 {
@@ -63,6 +64,7 @@ type disjoint_set<type>::find_parent_util(type node_id)
     return _parent[node_id] = find_parent_util(_parent[node_id]);
 }
 
+/* Implementation of UNION of two sets using UnionByRank. */
 template <class type>
 void disjoint_set<type>::union_set(type node_id1, type node_id2)
 {
@@ -105,10 +107,3 @@ void disjoint_set<type>::union_set(type node_id1, type node_id2)
     return;
 }
 #endif
-
-/* Temp dry run.
- 1 2 3 4 5 -> 5
- Union(12) [12, 3,4,5] -> 4
- union(34) [12, 34, 5] -> 3
- Union(12,34) [1234, 5] -> 2
-*/
