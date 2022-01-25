@@ -1,12 +1,16 @@
 #ifndef disjointset_h
 #define disjointset_h
+#include <iostream>
 #include <vector>
 
 template <class type>
 class disjoint_set
 {
 public:
-    disjoint_set(__int32 n = 0) : _groupCount(n), _setcount(std::vector<type>(_groupCount, 1)) { createDisjointSet(); }
+    disjoint_set(type n = 0) : _groupCount(n), _setcount(std::vector<type>(_groupCount, 1))
+    {
+        createDisjointSet();
+    }
     void union_set(type, type);
     type find_parent(type);
     bool is_valid(type &) const;
@@ -18,7 +22,7 @@ public:
     };
 
 private:
-    __int32 _groupCount;
+    type _groupCount;
     std::vector<type> _parent;
     std::vector<type> _rank;
     std::vector<type> _setcount;
@@ -35,21 +39,21 @@ inline void disjoint_set<type>::createDisjointSet()
         _parent[i] = i;
 }
 
-/* Used to check if node used is valid and belongs to dsu or not */
+/*To check if node used is valid and belongs to the dsu or no.*/
 template <class type>
 inline bool disjoint_set<type>::is_valid(type &node_id) const
 {
     return (node_id >= 0 and node_id < _parent.size());
 }
 
-/* To detect cycle for 2 nodes with respective ids */
+/*To detect cycle for 2 nodes with respective node ids.*/
 template <class type>
 bool disjoint_set<type>::detect_cycle(type &node_id1, type &node_id2)
 {
     return (find_parent(node_id1) == find_parent(node_id2));
 }
 
-/* Implementation of find_parent using Path Compression. */
+/*Implementation of find_parent using Path Compression.*/
 template <class type>
 type disjoint_set<type>::find_parent(type node_id)
 {
@@ -64,7 +68,7 @@ type disjoint_set<type>::find_parent_util(type node_id)
     return _parent[node_id] = find_parent_util(_parent[node_id]);
 }
 
-/* Implementation of UNION of two sets using UnionByRank. */
+/*Implementation of UNION of two sets using Union-By Rank.*/
 template <class type>
 void disjoint_set<type>::union_set(type node_id1, type node_id2)
 {
