@@ -3,6 +3,13 @@
 #include <iostream>
 #include <vector>
 
+static const auto optimize = []() 
+{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    return 0;
+}();
+
 template <class type>
 class disjoint_set
 {
